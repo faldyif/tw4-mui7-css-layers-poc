@@ -38,6 +38,7 @@ All pages render the same test elements. Only the setup is different.
 | `layer-order-in-css` | `enableCssLayer`. The CSS file declares `@layer theme, base, mui, components, utilities;` before `@import "tailwindcss";`. |
 | `layer-order-in-html` | `enableCssLayer`. A `<style>` tag in the HTML `<head>` declares the layer order. |
 | `layer-order-globalstyles` | `enableCssLayer` and `<GlobalStyles styles="@layer theme, base, mui, components, utilities;" />`. |
+| `layer-order-css-and-globalstyles` | `enableCssLayer`. The layer order is in the CSS file and in `<GlobalStyles>`. |
 | `layer-modular` | `enableCssLayer` and `createTheme({ modularCssLayers: '@layer theme, base, mui, components, utilities;' })`. |
 | `modular-only` | `modularCssLayers` without `enableCssLayer`. |
 
@@ -47,20 +48,20 @@ Each page has a results panel. The panel reads `getComputedStyle` from the test 
 
 Viewport 1200px, Chromium, production build. ✓ = the result that a developer expects. ✗ = a different result.
 
-| Test | default | layer-no-order | layer-order-in-css | layer-order-in-html | layer-order-globalstyles | layer-modular | modular-only |
-|---|---|---|---|---|---|---|---|
-| `sx={{ width: 300 }}` + `w-full` | ✗ 300px | ✓ 500px | ✓ 500px | ✓ 500px | ✓ 500px | ✓ 500px | ✗ 300px |
-| `sx={{ width: 300 }}` + `w-full!` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Paper `p-8` (MUI does not set padding) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Paper `rounded-none` | ✗ 4px | ✓ 0px | ✓ 0px | ✓ 0px | ✓ 0px | ✓ 0px | ✓ 0px |
-| Button `px-10` | ✗ 16px | ✓ 40px | ✓ 40px | ✓ 40px | ✓ 40px | ✓ 40px | ✓ 40px |
-| styled-components `width: 300px` + `w-full` | ✗ 300px | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
-| styled-components `width: 300px` + `w-full!` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `<Dialog className="w-full md:w-146.5">` | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
-| `<Dialog slotProps={{ paper: { className: "w-full md:w-146.5" } }}>` | ✓ 586px | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| MUI Button padding and background | ✓ | ✗ 0px, transparent | ✗ | ✗ | ✓ | ✓ | ✓ |
-| MUI Typography h1 font size | ✓ 96px | ✗ 16px | ✗ | ✗ | ✓ | ✓ | ✓ |
-| MUI TextField and Divider borders | ✓ 1px | ✗ 0px | ✗ | ✗ | ✓ | ✓ | ✓ |
+| Test | default | layer-no-order | layer-order-in-css | layer-order-in-html | layer-order-globalstyles | layer-order-css-and-globalstyles | layer-modular | modular-only |
+|---|---|---|---|---|---|---|---|---|
+| `sx={{ width: 300 }}` + `w-full` | ✗ 300px | ✓ 500px | ✓ 500px | ✓ 500px | ✓ 500px | ✓ 500px | ✓ 500px | ✗ 300px |
+| `sx={{ width: 300 }}` + `w-full!` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Paper `p-8` (MUI does not set padding) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Paper `rounded-none` | ✗ 4px | ✓ 0px | ✓ 0px | ✓ 0px | ✓ 0px | ✓ 0px | ✓ 0px | ✓ 0px |
+| Button `px-10` | ✗ 16px | ✓ 40px | ✓ 40px | ✓ 40px | ✓ 40px | ✓ 40px | ✓ 40px | ✓ 40px |
+| styled-components `width: 300px` + `w-full` | ✗ 300px | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| styled-components `width: 300px` + `w-full!` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `<Dialog className="w-full md:w-146.5">` | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| `<Dialog slotProps={{ paper: { className: "w-full md:w-146.5" } }}>` | ✓ 586px | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| MUI Button padding and background | ✓ | ✗ 0px, transparent | ✗ | ✗ | ✓ | ✓ | ✓ | ✓ |
+| MUI Typography h1 font size | ✓ 96px | ✗ 16px | ✗ | ✗ | ✓ | ✓ | ✓ | ✓ |
+| MUI TextField and Divider borders | ✓ 1px | ✗ 0px | ✗ | ✗ | ✓ | ✓ | ✓ | ✓ |
 
 At viewport 600px, the results are the same, with one difference: in `layer-no-order`, `layer-order-in-css` and `layer-order-in-html`, the slotProps dialog paper is 600px wide, not 536px. Preflight removes the MUI paper margin.
 
@@ -71,10 +72,14 @@ At viewport 600px, the results are the same, with one difference: in `layer-no-o
 3. styled-components v6 styles are not in a layer. They override Tailwind classes in all setups, also when MUI uses `enableCssLayer`.
 4. With `enableCssLayer` only, or with the layer order in the CSS file or in the HTML, the `mui` layer comes before the Tailwind `base` layer. Thus the Preflight reset overrides MUI component styles.
 5. Two setups let Tailwind classes win and keep MUI components unchanged:
-   - `enableCssLayer` with the layer order in `<GlobalStyles>`.
+   - `enableCssLayer` with the layer order in `<GlobalStyles>`. The layer order can also be in the CSS file, but the `<GlobalStyles>` line is the one that sets it.
    - `enableCssLayer` with `modularCssLayers` in the theme.
 6. `modularCssLayers` without `enableCssLayer` puts `sx` styles in a layer that comes after `utilities`. Thus `sx` styles still override Tailwind classes.
 7. `className` on `Dialog` goes to the root element, not to the paper. At 1200px, `md:w-146.5` makes the root 586px wide and aligned left. Thus the dialog is not centered (307px to the left). `slotProps.paper.className` gives the expected paper width.
+
+## Screenshots
+
+The `screenshots/` folder has annotated screenshots of some results. `npm run screenshots` makes them again from the production build.
 
 ## Run it locally
 

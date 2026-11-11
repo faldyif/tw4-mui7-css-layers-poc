@@ -6,7 +6,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const PAGES = ['baseline', 'default', 'layer-no-order', 'layer-order-in-css', 'layer-order-in-html', 'layer-order-globalstyles', 'layer-modular', 'modular-only'];
+const PAGES = ['baseline', 'default', 'layer-no-order', 'layer-order-in-css', 'layer-order-in-html', 'layer-order-globalstyles', 'layer-order-css-and-globalstyles', 'layer-modular', 'modular-only'];
 const WIDTHS = [600, 1200];
 
 const root = path.resolve('dist');

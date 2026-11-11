@@ -5,7 +5,8 @@
   "scripts": {
     "build": "vite build",
     "preview": "vite preview",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

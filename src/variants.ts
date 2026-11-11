@@ -45,6 +45,12 @@ export const VARIANTS: Variant[] = [
     tailwind: true,
   },
   {
+    slug: 'layer-order-css-and-globalstyles',
+    title: 'enableCssLayer + layer order in the CSS file and in GlobalStyles',
+    setup: [`src/tailwind-with-layer-order.css: ${LAYER_ORDER} before @import "tailwindcss";`, '<StyledEngineProvider enableCssLayer>', `<GlobalStyles styles="${LAYER_ORDER}" />`],
+    tailwind: true,
+  },
+  {
     slug: 'layer-modular',
     title: 'enableCssLayer + theme modularCssLayers',
     setup: ['src/tailwind.css: @import "tailwindcss";', '<StyledEngineProvider enableCssLayer>', `createTheme({ modularCssLayers: '${LAYER_ORDER}' })`],
