@@ -5,6 +5,8 @@ This project tests which styles win when an app uses Tailwind CSS v4, MUI v7 (Em
 Open it in the browser, with no install:
 https://stackblitz.com/github/faldyif/tw4-mui7-css-layers-poc
 
+The StackBlitz preview pane is narrow (less than 768px). To test the Tailwind `md` breakpoint, open the preview in a new tab and make the window wider than 768px.
+
 ## Questions
 
 1. Does a Tailwind class override an MUI `sx` style or an MUI component style on the same property?
