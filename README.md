@@ -79,7 +79,27 @@ At viewport 600px, the results are the same, with one difference: in `layer-no-o
 
 ## Screenshots
 
-The `screenshots/` folder has annotated screenshots of some results. `npm run screenshots` makes them again from the production build.
+These screenshots show some results at viewport 1200px. `npm run screenshots` makes them again from the production build.
+
+### Dialog: `className` on the root vs on the paper
+
+Page `default`. `className` on `Dialog` goes to the root element. The paper keeps its content width, and the dialog is 307px to the left of the center.
+
+![className on Dialog: the paper is 199px wide and 307px to the left of the center](screenshots/dialog-classname-on-root.png)
+
+`slotProps.paper.className` goes to the paper. The paper is 586px wide and centered.
+
+![className on slotProps.paper: the paper is 586px wide and centered](screenshots/dialog-classname-on-paper.png)
+
+### MUI components with Preflight: where the layer order is declared
+
+Page `layer-order-in-css`. The layer order is in the CSS file only. Preflight overrides the MUI styles.
+
+![Layer order in the CSS file only: MUI Button, h1, TextField and Divider lose their styles](screenshots/mui-layer-order-in-css-only.png)
+
+Page `layer-order-css-and-globalstyles`. The layer order is also in `<GlobalStyles>`. The MUI styles stay the same as without Tailwind.
+
+![Layer order in the CSS file and in GlobalStyles: MUI styles stay the same](screenshots/mui-layer-order-css-and-globalstyles.png)
 
 ## Run it locally
 
